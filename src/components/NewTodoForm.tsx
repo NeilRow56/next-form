@@ -3,13 +3,26 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { createTodoAction } from '@/lib/actions'
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
+import { toast } from 'sonner'
 
 export default function NewTodoForm() {
   const [state, formAction, insPending] = useActionState(createTodoAction, {
     success: '',
     error: undefined
   })
+
+  useEffect(() => {
+    if (state.error) {
+      toast.error(state.error)
+    }
+  }, [state.error])
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success)
+    }
+  }, [state.success])
   return (
     <form action={formAction}>
       <div className='text-red-500'>{state.error}</div>
