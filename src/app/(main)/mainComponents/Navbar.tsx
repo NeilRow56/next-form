@@ -1,3 +1,5 @@
+import SearchField from '@/components/SearchField'
+import ThemeToggle from '@/components/ThemeToggle'
 import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 
@@ -8,8 +10,11 @@ export default function Navbar() {
         <Link href='/' className='text-2xl font-bold text-primary'>
           bugbook
         </Link>
-
-        <UserButton />
+        <SearchField />
+        <div className='flex items-center gap-3'>
+          <ThemeToggle />
+          <UserButton />
+        </div>
       </div>
     </header>
   )
