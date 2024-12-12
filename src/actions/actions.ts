@@ -25,7 +25,7 @@ export async function createContact(data: {
 export async function getContacts() {
   try {
     const contacts = await db.contact.findMany({
-      orderBy: { name: 'asc' }
+      orderBy: { createdAt: 'desc' }
     })
     return { success: true, contacts }
   } catch (error) {
