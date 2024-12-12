@@ -1,17 +1,16 @@
-import NewTodoForm from '@/components/NewTodoForm'
-import TodoList from '@/components/todo-list'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import React from 'react'
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <section className='py-24'>
-      <div className='container mx-auto flex w-full max-w-2xl flex-col'>
-        <h1 className='font-serif text-3xl font-medium'>
-          Keep Track of your tasks
-        </h1>
-        <NewTodoForm />
-        <TodoList />
-      </div>
-    </section>
+    <div className='flex min-h-screen flex-col items-center justify-center space-y-8'>
+      <h1 className='scroll-m-20 text-balance p-12 text-center text-4xl font-extrabold tracking-tight lg:text-5xl'>
+        React Query Complete Crash Course
+      </h1>
+      <Button asChild>
+        <Link href={'/contacts'}>View the Demo App</Link>
+      </Button>
+    </div>
   )
 }
