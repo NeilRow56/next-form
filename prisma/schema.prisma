@@ -13,15 +13,17 @@ datasource db {
 }
 
 model User {
-  id                    String         @id
+  id                    String         @id @default(cuid())
+  clerkUserId           String         @unique
   username              String         @unique
-  displayName           String
+  firstName             String?      
+  lastName              String?      
+  displayName           String?
   email                 String?        @unique
   passwordHash          String?
-  googleId              String?        @unique
+  
   avatarUrl             String?
   bio                   String?
-  
   posts                 Post[]
   following             Follow[]       @relation("Following")
   followers             Follow[]       @relation("Followers")
@@ -30,10 +32,51 @@ model User {
   comments              Comment[]
   receivedNotifications Notification[] @relation("Recipient")
   issuedNotifications   Notification[] @relation("Issuer")
-
-  createdAt DateTime @default(now())
+  company               Company? @relation(fields: [companyId], references: [id])
+  companyId             String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 // name of table
   @@map("users")
+}
+
+model Company {
+  id                    String         @id @default(cuid())
+  name                  String
+  slug                  String         @unique
+  username              String         @unique
+  tagline               String?      
+  description           String?      
+  phone                 String?
+  email                 String?        @unique
+  website               String?
+  staff                 User[]
+  avatarUrl             String?
+  bio                   String?
+  services              Service[]
+  category              Category @relation(fields: [categoryId], references: [id])
+  categoryId            String
+  createdAt DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Service {
+  id                    String         @id @default(cuid())
+  name                  String
+  
+  description           String         
+  company               Company? @relation(fields: [companyId], references: [id])
+  companyId             String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+model Category {
+  id                    String         @id @default(cuid())
+  name                  String
+  description           String         
+  companies             Company[]
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 }
 
 
