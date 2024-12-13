@@ -2,8 +2,8 @@
 
 export default function Home() {
   return (
-    <main className='flex w-full min-w-0 gap-5'>
-      <div className='w-full min-w-0 space-y-5'>Home</div>
+    <main className='h-[200vh] w-full bg-red-500'>
+      <div className='w-full'>Front Page</div>
     </main>
   )
 }
